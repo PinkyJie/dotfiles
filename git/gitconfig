@@ -1,6 +1,6 @@
 [user]
-    name = Mark Nichols
-    email = mark@zanshin.net
+    name = PinkyJie
+    email = pilixiaoxuanfeng@gmail.com
 
 [github]
     user = zanshin
@@ -26,7 +26,7 @@
     untracked = bold yellow
 
 [core]
-    editor = vim 
+    editor = vim
     autocrlf = input
     safecrlf = warn
     excludesfile = /Users/mark/.gitignore_global
