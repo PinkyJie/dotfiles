@@ -26,23 +26,23 @@ set rtp+=~/.vim/bundle/vundle/  " add vundle to run time path
 call vundle#rc()
 
 " let Vundle manage Vundle
-Bundle 'gmarik/vundle'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'sjl/badwolf/'
-" Bundle 'scrooloose/nerdtree'
-Bundle 'kien/ctrlp.vim'
-Bundle 'tpope/vim-fugitive'
-Bundle 'bling/vim-airline'
-Bundle 'benmills/vimux'
-Bundle 'git://git.wincent.com/command-t.git'
-Bundle 'plasticboy/vim-markdown'
-Bundle 'fholgado/minibufexpl.vim'
-" vim-snipmate requires vim-addon-mw-utils and tlib_vim
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "garbas/vim-snipmate"
-" Some snippets to get started
-Bundle "honza/vim-snippets"
+"Bundle 'gmarik/vundle'
+"Bundle 'altercation/vim-colors-solarized'
+"Bundle 'sjl/badwolf/'
+"" Bundle 'scrooloose/nerdtree'
+"Bundle 'kien/ctrlp.vim'
+"Bundle 'tpope/vim-fugitive'
+"Bundle 'bling/vim-airline'
+"Bundle 'benmills/vimux'
+"Bundle 'git://git.wincent.com/command-t.git'
+"Bundle 'plasticboy/vim-markdown'
+"Bundle 'fholgado/minibufexpl.vim'
+"" vim-snipmate requires vim-addon-mw-utils and tlib_vim
+"Bundle "MarcWeber/vim-addon-mw-utils"
+"Bundle "tomtom/tlib_vim"
+"Bundle "garbas/vim-snipmate"
+"" Some snippets to get started
+"Bundle "honza/vim-snippets"
 
 if has('autocmd')
   filetype plugin indent on    " enable plugins, detection and indenting
@@ -63,7 +63,7 @@ endif
 cmap w!! w !sudo tee > /dev/null %
 
 " -------------------------------------------------------------------
-" time out mappings after 1 second (1000) 
+" time out mappings after 1 second (1000)
 " and key codes after 1/2 a second (500)
 " -------------------------------------------------------------------
 set timeout timeoutlen=1000 ttimeoutlen=500
@@ -133,7 +133,7 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 " -------------------------------------------------------------------
-" Move line(s) up or down via C-j and C-k respectively 
+" Move line(s) up or down via C-j and C-k respectively
 " -------------------------------------------------------------------
 " Normal mode
 nnoremap <C-j> :m .+1<CR>==
@@ -376,10 +376,10 @@ nmap <leader>vz :call VimuxRunCommand("dz")<CR>
 nmap <leader>vd :call VimuxRunCommand("deploy")<CR>
 
 " MiniBufExpl setup
-let g:miniBufExplMapWindowNavVim = 1 
-let g:miniBufExplMapWindowNavArrows = 1 
-let g:miniBufExplMapCTabSwitchBufs = 1 
-let g:miniBufExplModSelTarget = 1 
+let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplModSelTarget = 1
 
 " MiniBufExpl Colors
 hi MBENormal               ctermfg=244 ctermbg=235
