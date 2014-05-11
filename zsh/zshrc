@@ -12,3 +12,4 @@ source ~/.zsh/zsh_hooks.zsh
 #source ~/.zsh/hitch.zsh
 # source /opt/github/env.sh
 source  ${HOME}/.dotfiles/z/z.sh
+

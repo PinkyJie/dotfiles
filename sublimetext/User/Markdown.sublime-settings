@@ -1,8 +1,7 @@
 {
 	"auto_match_enabled": true,
 	"caret_style": "wide",
-	"color_scheme": "Packages/MarkdownEditing/MarkdownEditor-Focus.tmTheme",
-	"draw_centered": true,
+	//"draw_centered": true,
 	"extensions":
 	[
 		"md",
@@ -17,7 +16,7 @@
 		"no_round",
 		"directwrite"
 	],
-	"font_size": 12,
+	"font_size": 15,
 	"highlight_line": true,
 	"line_padding_top": 5,
 	"match_header_hashes": false,
