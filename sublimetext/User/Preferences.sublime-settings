@@ -29,11 +29,11 @@
 		".hg",
 		"CVS"
 	],
+	"font_size": 15,
 	"ignored_packages":
 	[
 		"Vintage"
 	],
-	"font_size": 15,
 	"overlay_scroll_bars": "enabled",
 	"tab_size": 4,
 	"translate_tabs_to_spaces": true,
