@@ -22,3 +22,7 @@ fi
 if which rvm-prompt &> /dev/null; then
     export PATH=$HOME/.rvm/bin:$PATH
 fi
+
+
+export ANDROID_HOME=~/Soft/android-sdk-macosx
+export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
