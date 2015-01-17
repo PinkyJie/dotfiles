@@ -10,3 +10,7 @@ Session.vim
 
 # Ignore vim/bundles
 vim/bundle
+
+*.pyc
+Package Control.last-run
+Package Control.cache
