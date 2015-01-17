@@ -3,7 +3,7 @@ easily.
 
 #Installation
 
-    git clone git://github.com/zanshin/dotfiles.git ~/.dotfiles
+    git clone git://github.com/PinkyJie/dotfiles.git ~/.dotfiles
 	
 # Updating
 There are several git submodules included in this configuration. On a new
@@ -83,18 +83,6 @@ For machines where Sublime Text 2 cannot be installed, link
 `git/gitconfig_remote` instead. This will use `vimdiff` as the merge and diff
 tool rather than ST2.
 
-## Mercurial (hg)
-For Mercurial configuration and global ignore files, create these symlinks:
-
-    $ ln -s ~/.dotfiles/hg/hgrc ~/.hgrc
-    $ ln -s ~/.dotfiles/hg/hgignore_global ~/.hgignore_global
-	
-
-## TextMate (mate)
-For TextMate 2 settings create the following symlink:
-
-    $ ln -s ~/.dotflles/textmate/tm_properties ~/.tm_properties
-
 ## tmux (terminal multiplexer) configuration
 For tmux configuration create this symlink:
 
@@ -113,20 +101,9 @@ Finally, to enable the command line tool, `subl`, add this symlink:
 
     $ ln -s /Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl /usr/local/bin/subl
 
-##z
-To enable z directory function from https://github.com/rupa/z, source the
-`z.sh` script in the `.zshrc` file: 
-
-    source ${HOME}/.dotfiles/z/z.sh
-
-## Doing
-Install `doing` gem (https://github.com/ttscoff/doing/ & http://brettterpstra.com/2014/03/15/scatterbrains-3-a-new-tool-for-doing/)
-
-    $ [sudo] gem install doing
-
-Create symlink to `doingrc` file.
-
-    $ ln -s ~/.dotfiles/doing/doingrc ~/.doingrc
+## aria2
+    mkdir ~/.aria2
+    $ ln -s ~/.dotfiles/aria2/aria2.conf ~/.aria2/aria2.conf
 
 
 
