@@ -263,4 +263,3 @@ alias nomnom='killall'
 alias cya='reboot'
 alias kthxbai='halt'
 
-alias bwg='ssh root@104.224.168.195 -p 27230'
