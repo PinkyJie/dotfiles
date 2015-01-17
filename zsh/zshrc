@@ -13,3 +13,4 @@ source ~/.zsh/zsh_hooks.zsh
 # source /opt/github/env.sh
 source  ${HOME}/.dotfiles/z/z.sh
 
+plugins=(git brew sudo npm bower z zsh_reload colored-man zsh-syntax-highlighting)

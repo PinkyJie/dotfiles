@@ -87,7 +87,7 @@ alias mutt 'cd ~/Desktop && mutt'
 #alias s='subl -n .'
 alias p='cd ~/Projects'
 alias v='vim'
-alias bu='brew update; brew upgrade; brew cleanup; brew doctor'
+alias bu='brew update; brew upgrade; brew upgrade caskroom/cask/brew-cask;  brew cleanup; brew cask cleanup; brew doctor'
 alias wifi="networksetup -setairportpower en0"
 alias makepass="openssl rand -base64 12"
 
@@ -262,3 +262,5 @@ alias nomz='ps aux | less'
 alias nomnom='killall'
 alias cya='reboot'
 alias kthxbai='halt'
+
+alias bwg='ssh root@104.224.168.195 -p 27230'
