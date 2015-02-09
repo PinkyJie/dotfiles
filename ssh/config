@@ -2,5 +2,5 @@
 host bwg
     HostName 104.224.168.195
     User root
-    Port 27230
+    Port 26300
 
