@@ -263,3 +263,5 @@ alias nomnom='killall'
 alias cya='reboot'
 alias kthxbai='halt'
 
+
+alias gfw='proxychains4'
