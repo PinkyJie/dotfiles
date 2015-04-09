@@ -42,34 +42,6 @@ For ssh configuration, create the following symlink:
 
     ln -s ~/.dotfiles/ssh/config ~/.ssh/config
 
-## Vim
-For Vim configuration and use, create the following symlinks:
-
-    ln -s ~/.dotfiles/vim ~/.vim
-    ln -s ~/.dotfiles/vim/vimrc ~/.vimrc
-    ln -s ~/.dotfiles/vim/gvimrc ~/.gvimrc
-
-To install Vim bundles, which are managed via Vundle, via the command line run
-
-    vim +BundleInstall +qall
-
-From inside of Vim run
-
-    :BundleInstall
-
-If this is the first time setting up Vim on the machine, it will be necessary to install Vundle itself, prior to teh bundles.
-
-    git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-
-## bash
-For those machines where zsh isn't installed or won't easily work, create the
-following symlinks:
-
-    $ ln -s ~/.dotfiles/bash/bash_profile ~/.bash_profile
-    $ ln -s ~/.dotfiles/bash/bashrc ~/.bashrc
-    $ ln -s ~/.dotfiles/bash/bash_aliases ~/.bash_aliases
-    $ ln -s ~/.dotfiles/bash/bash_history ~/.bash_history
-
 ## Git
 For Git configuration and global ignore files, create these symlinks:
 
