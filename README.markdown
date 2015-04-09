@@ -4,23 +4,6 @@ easily.
 #Installation
 
     git clone git://github.com/PinkyJie/dotfiles.git ~/.dotfiles
-	
-# Updating
-There are several git submodules included in this configuration. On a new
-installation these submodules need to be initialized and updated.
-
-    $ cd ~/.dotfiles
-    $ git submodule init 
-    $ git submodule update 
-
-It is also possible to use `git pull` to update the submodules.
-
-    $ cd ~/.dotfiles
-    $ git submodule foreach git pull origin master
-
-Vundle managed Vim bundles maybe updated from the command line via
-
-    $ vim +BundleInstall +qall
 
 #Setup
 ## Homebrew
@@ -39,6 +22,20 @@ For zsh configuration create the following symlinks:
     ln -s ~/.dotfiles/zsh/zshrc ~/.zshrc
     ln -s ~/.dotfiles/zsh/zshenv ~/.zshenv
     ln -s ~/.dotfiles/zsh/zprofile ~/.zprofile
+
+## oh-my-zsh
+Install oh-my-zsh first:
+    
+    cd ~
+    curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+
+Our `.zshrc` file will be overwritten by oh-my-zh, we need to roll back our original one:
+
+    mv .zshrc ~/.dotfiles/zsh/oh-my-zsh.zsh
+    ln -s ~/.dotfiles/zsh/zshrc ~/.zshrc
+    cp ~/.dotfiles/ohmyzsh/* ~/.oh-my-zsh/themes/
+
+Cusomize oh-my-zsh configuration in `~/.dotfiles/zsh/oh-my-zsh.zsh`.
 		
 ## ssh
 For ssh configuration, create the following symlink:

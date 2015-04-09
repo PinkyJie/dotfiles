@@ -8,9 +8,6 @@ source ~/.zsh/aliases.zsh
 source ~/.zsh/bindkeys.zsh
 source ~/.zsh/functions.zsh
 source ~/.zsh/history.zsh
-source ~/.zsh/zsh_hooks.zsh
-#source ~/.zsh/hitch.zsh
-# source /opt/github/env.sh
-source  ${HOME}/.dotfiles/z/z.sh
+# source ~/.zsh/zsh_hooks.zsh
+source ~/.zsh/oh-my-zsh.zsh
 
-plugins=(git brew sudo npm bower z zsh_reload colored-man zsh-syntax-highlighting)
