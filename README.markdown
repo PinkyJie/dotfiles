@@ -74,5 +74,10 @@ Finally, to enable the command line tool, `subl`, add this symlink:
     mkdir ~/.aria2
     $ ln -s ~/.dotfiles/aria2/aria2.conf ~/.aria2/aria2.conf
 
+## proxychains
+Use shadowsocks as proxy server:
+
+    mkdir ~/.proxychains
+    ln -s ~/.dotfiles/proxychains/proxychains.conf ~/.proxychains/proxychains.conf
 
 
