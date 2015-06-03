@@ -27,7 +27,8 @@
 		".svn",
 		".git",
 		".hg",
-		"CVS"
+		"CVS",
+		"node_modules"
 	],
 	"font_size": 15,
 	"ignored_packages":
@@ -35,9 +36,13 @@
 		"Vintage"
 	],
 	"overlay_scroll_bars": "enabled",
-	"tab_size": 2,
+	"tab_size": 4,
 	"translate_tabs_to_spaces": true,
 	"trim_trailing_white_space_on_save": true,
 	"word_wrap": true,
-	"wrap_width": 100
+	"wrap_width": 100,
+	"theme": "Afterglow.sublime-theme",
+    "color_scheme": "Packages/Theme - Afterglow/Afterglow.tmTheme",
+    "tabs_padding_small": true,
+    "tabs_small": true
 }
