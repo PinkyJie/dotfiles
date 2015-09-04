@@ -23,4 +23,6 @@ if which rvm-prompt &> /dev/null; then
     export PATH=$HOME/.rvm/bin:$PATH
 fi
 
+# Add Node local module folder
+export PATH="./node_modules/.bin:$PATH"
 
