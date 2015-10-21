@@ -25,7 +25,7 @@ For zsh configuration create the following symlinks:
 
 ## oh-my-zsh
 Install oh-my-zsh first:
-    
+
     cd ~
     curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 
@@ -69,8 +69,14 @@ For Sublime Text 2 settings, remove the `User` directory from
 Finally, to enable the command line tool, `subl`, add this symlink:
 
     $ ln -s /Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl /usr/local/bin/subl
+    
+## Atom
+For Atom settings, remove the `.atom` directory from `~/`. Then add this symlink:
+
+    $ ln -s ~/.dotfiles/atom ~/.atom
 
 ## aria2
+
     mkdir ~/.aria2
     $ ln -s ~/.dotfiles/aria2/aria2.conf ~/.aria2/aria2.conf
 
