@@ -1,16 +1,10 @@
-#tmux ignores
+.DS_Store
+
+# tmux ignores
 *.log
 
-# VIM ignores
-.*.s[a-w][a-z]
-*.un~
-Session.vim
-.netrwhist
-*~
-
-# Ignore vim/bundles
-vim/bundle
-
+# sublime
 *.pyc
 Package Control.last-run
 Package Control.cache
+Package Control.*-ca-bundle
