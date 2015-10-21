@@ -1,0 +1,24 @@
+"*":
+  "exception-reporting":
+    userId: "3ef39475-d997-f1b9-af5a-372ced265981"
+  welcome:
+    showOnStartup: false
+  core: {}
+  editor:
+    invisibles: {}
+    softWrap: true
+    tabLength: 4
+    showIndentGuide: true
+    tabType: "soft"
+    fontFamily: "Monaco"
+  linter: {}
+  minimap:
+    plugins:
+      "git-diff": true
+      "find-and-replace": true
+  jsformat:
+    format_on_save: false
+  "linter-jshint": {}
+  "linter-eslint": {}
+  tabs:
+    usePreviewTabs: true

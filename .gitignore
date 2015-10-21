@@ -8,3 +8,11 @@
 Package Control.last-run
 Package Control.cache
 Package Control.*-ca-bundle
+
+# atom
+atom/.apm/
+atom/.gitignore
+atom/.node-gyp/
+atom/compile-cache/
+atom/packages/
+atom/storage/
