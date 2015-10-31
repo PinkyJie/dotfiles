@@ -3,7 +3,11 @@
     userId: "3ef39475-d997-f1b9-af5a-372ced265981"
   welcome:
     showOnStartup: false
-  core: {}
+  core:
+    disabledPackages: [
+      "linter-jscs"
+      "linter-jshint"
+    ]
   editor:
     invisibles: {}
     softWrap: true
@@ -22,3 +26,5 @@
   "linter-eslint": {}
   tabs:
     usePreviewTabs: true
+  whitespace:
+    ignoreWhitespaceOnlyLines: true
