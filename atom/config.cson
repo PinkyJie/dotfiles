@@ -27,4 +27,5 @@
   tabs:
     usePreviewTabs: true
   whitespace:
-    ignoreWhitespaceOnlyLines: true
+    ensureSingleTrailingNewline: false
+    ignoreWhitespaceOnCurrentLine: false
