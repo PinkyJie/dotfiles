@@ -1,0 +1,19 @@
+{
+	"user":
+	{
+		"lint_mode": "background",
+		"linters":
+		{
+			"eslint":
+			{
+				"@disable": false,
+				"args":
+				[
+				],
+				"excludes":
+				[
+				]
+			}
+		}
+	}
+}

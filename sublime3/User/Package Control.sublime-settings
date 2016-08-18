@@ -1,0 +1,14 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Babel",
+		"EditorConfig",
+		"SublimeLinter",
+		"SublimeLinter-contrib-eslint",
+		"Theme - Afterglow"
+	]
+}
