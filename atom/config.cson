@@ -1,31 +1,35 @@
 "*":
-  "exception-reporting":
-    userId: "3ef39475-d997-f1b9-af5a-372ced265981"
-  welcome:
-    showOnStartup: false
   core:
     disabledPackages: [
       "linter-jscs"
       "linter-jshint"
     ]
   editor:
+    fontFamily: "Monaco"
     invisibles: {}
+    showIndentGuide: true
     softWrap: true
     tabLength: 4
-    showIndentGuide: true
     tabType: "soft"
-    fontFamily: "Monaco"
-  linter: {}
-  minimap:
-    plugins:
-      "git-diff": true
-      "find-and-replace": true
+  "exception-reporting":
+    userId: "3ef39475-d997-f1b9-af5a-372ced265981"
   jsformat:
     format_on_save: false
-  "linter-jshint": {}
+  linter: {}
   "linter-eslint": {}
+  "linter-jshint": {}
+  minimap:
+    plugins:
+      "find-and-replace": true
+      "find-and-replaceDecorationsZIndex": 0
+      "git-diff": true
+      "git-diffDecorationsZIndex": 0
   tabs:
     usePreviewTabs: true
+  "tree-view":
+    hideIgnoredNames: true
+  welcome:
+    showOnStartup: false
   whitespace:
     ensureSingleTrailingNewline: false
     ignoreWhitespaceOnCurrentLine: false
