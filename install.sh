@@ -21,6 +21,7 @@ checkError() {
     echo "== Install $1: fail!"
     echo "== Exit!"
     exit 1
+  fi
 }
 
 echo "1. Install Homebrew"
@@ -81,7 +82,7 @@ ln -s ~/.dotfiles/zsh/zshenv ~/.zshenv
 ln -s ~/.dotfiles/zsh/zprofile ~/.zprofile
 
 # oh-my-zsh
-cp ~/dotfiles/ohmyzsh/* ~/.oh-my-zsh/themes/
+cp ~/.dotfiles/ohmyzsh/* ~/.oh-my-zsh/themes/
 
 # ssh
 ln -s ~/.dotfiles/ssh/config ~/.ssh/config
