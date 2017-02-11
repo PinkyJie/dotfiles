@@ -8,6 +8,7 @@
 Package Control.last-run
 Package Control.cache
 Package Control.*-ca-bundle
+*.crt
 
 # atom
 atom/.apm/
