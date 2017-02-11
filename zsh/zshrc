@@ -12,5 +12,5 @@ source ~/.zsh/history.zsh
 source ~/.zsh/oh-my-zsh.zsh
 
 # added by travis gem
-[ -f /Users/wjie/.travis/travis.sh ] && source /Users/wjie/.travis/travis.sh
+[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 
