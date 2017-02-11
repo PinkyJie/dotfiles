@@ -52,6 +52,9 @@ cur_path=`pwd`
 git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 checkError "oh-my-zsh"
 
+# zsh-autosugesstion
+git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+
 echo "2. Install homebrew-cask"
 echo "----------"
 
