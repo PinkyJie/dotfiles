@@ -29,7 +29,6 @@
 		".git",
 		".hg",
 		"CVS",
-		"node_modules"
 	],
 	"font_size": 15,
 	"ignored_packages":
