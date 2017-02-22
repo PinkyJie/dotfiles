@@ -64,8 +64,8 @@ checkError "homebrew-cask"
 
 # software
 echo -e "\n\n==== Software ====\n\n"
-echo "== Will install: alfred iterm2 sublime-text google-chrome aliwangwang java skitch appcleaner jitouch atom licecap mplayerx sogouinput youdao sourcetree insomniax qq spectacle shadowsocksx the-unarchiver"
-brew cask install alfred iterm2 sublime-text google-chrome aliwangwang java skitch appcleaner jitouch atom licecap mplayerx sogouinput youdao sourcetree insomniax qq spectacle shadowsocksx the-unarchiver
+echo "== Will install: alfred iterm2 sublime-text google-chrome aliwangwang skitch appcleaner jitouch atom licecap mplayerx biaduinput skype youdao sourcetree insomniax qq spectacle shadowsocksx the-unarchiver java"
+brew cask install alfred iterm2 sublime-text google-chrome aliwangwang skitch appcleaner jitouch atom licecap mplayerx biaduinput skype youdao sourcetree insomniax qq spectacle shadowsocksx the-unarchiver java
 checkError "Software"
 
 echo "3. SSH keygen"
