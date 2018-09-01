@@ -70,7 +70,7 @@ checkError "Software"
 
 echo "3. SSH keygen"
 echo "----------"
-ssh-keygen -t rsa -b 4096 -C pilixiaoxuanfeng@gmail.com
+ssh-keygen -t rsa -b 4096 -C pinkyjie.gn@gmail.com
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_rsa
 
