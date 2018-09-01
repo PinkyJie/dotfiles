@@ -87,7 +87,7 @@ alias mutt 'cd ~/Desktop && mutt'
 #alias s='subl -n .'
 alias p='cd ~/Projects'
 alias v='vim'
-alias bu='brew update; brew upgrade; brew upgrade caskroom/cask/brew-cask; brew cleanup; brew cask cleanup; brew doctor'
+alias bu='brew update; brew upgrade; brew upgrade caskroom/cask/brew-cask; brew cleanup; brew doctor'
 alias wifi="networksetup -setairportpower en0"
 alias makepass="openssl rand -base64 12"
 
