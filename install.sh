@@ -64,8 +64,8 @@ checkError "homebrew-cask"
 
 # software
 echo -e "\n\n==== Software ====\n\n"
-echo "== Will install: alfred iterm2 sublime-text google-chrome aliwangwang skitch appcleaner jitouch atom licecap mplayerx biaduinput skype youdao sourcetree insomniax qq spectacle shadowsocksx the-unarchiver java"
-brew cask install alfred iterm2 sublime-text google-chrome aliwangwang skitch appcleaner jitouch atom licecap mplayerx biaduinput skype youdao sourcetree insomniax qq spectacle shadowsocksx the-unarchiver java
+echo "== Will install: alfred iterm2 vscode google-chrome aliwangwang skitch appcleaner jitouch licecap mplayerx biaduinput skype youdao sourcetree insomniax qq spectacle shadowsocksx the-unarchiver java"
+brew cask install alfred iterm2 visual-studio-code google-chrome aliwangwang skitch appcleaner jitouch licecap mplayerx biaduinput skype youdao sourcetree insomniax qq spectacle shadowsocksx the-unarchiver java
 checkError "Software"
 
 echo "3. SSH keygen"
@@ -97,20 +97,11 @@ ln -s ~/.dotfiles/git/gitignore_global ~/.gitignore_global
 # tmux
 ln -s ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
 
-# sublime
-echo "== Download sublime package control"
-# need to open sublime once to let sublime create folders
-subl &
-sublime_pid=$!
-sleep 1s
-kill -9 sublime_pid
-wget -O ~/Library/Application\ Support/Sublime\ Text\ 3/Installed\ Packages/Package\ Control.sublime-package https://packagecontrol.io/Package%20Control.sublime-package
-rm -rf ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
-ln -s ~/.dotfiles/sublime3/User ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
-
-# atom
-rm -rf ~/.atom
-ln -s ~/.dotfiles/atom ~/.atom
+# vscode
+rm -rf ~/Library/Application\ Support/Code/User
+ln -s ~/.dotfiles/vscode/User ~/Library/Application\ Support/Code/User
+echo "== Install vscode plugins"
+cat ~/.dotfiles/vscode/extension.list | xargs -L 1 code-insiders --install-extension
 
 # aria2
 mkdir ~/.aria2

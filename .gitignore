@@ -3,18 +3,5 @@
 # tmux ignores
 *.log
 
-# sublime
-*.pyc
-Package Control.last-run
-Package Control.cache
-Package Control.*-ca-bundle
-*.crt
-
-# atom
-atom/.apm/
-atom/.gitignore
-atom/.node-gyp/
-atom/compile-cache/
-atom/packages/
-atom/storage/
-atom/blob-store/
+# vscode
+/vscode/User/workspaceStorage

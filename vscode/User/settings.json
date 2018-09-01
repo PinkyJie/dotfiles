@@ -1,0 +1,31 @@
+{
+    "editor.fontSize": 14,
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "workbench.editor.enablePreview":false,
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "editor.wordWrap": "on",
+    "editor.wrappingIndent": "indent",
+    "window.zoomLevel": 0,
+    "typescript.autoImportSuggestions.enabled": false,
+    "gitlens.advanced.messages": {
+        "suppressCommitHasNoPreviousCommitWarning": false,
+        "suppressCommitNotFoundWarning": false,
+        "suppressFileNotUnderSourceControlWarning": false,
+        "suppressGitVersionWarning": false,
+        "suppressLineUncommittedWarning": false,
+        "suppressNoRepositoryWarning": false,
+        "suppressResultsExplorerNotice": false,
+        "suppressShowKeyBindingsNotice": true,
+        "suppressUpdateNotice": false,
+        "suppressWelcomeNotice": true
+    },
+    "gitlens.keymap": "alternate",
+    "explorer.confirmDelete": false,
+    "cSpell.userWords": [
+        "count",
+        "reprompt"
+    ],
+    "workbench.startupEditor": "newUntitledFile",
+    "editor.formatOnSave": true
+}
