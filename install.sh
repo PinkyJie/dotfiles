@@ -31,20 +31,10 @@ echo "----------"
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 checkError "homebrew"
 
-# node
-echo -e "\n\n==== Node ===\n\n"
-brew install node
-checkError "node"
-echo "== Check node version:"
-echo "node -v"
-node -v
-echo "npm -v"
-npm -v
-
 # common command line tool
 echo -e "\n\n==== Command Line Tool ====\n\n"
-echo "== Will install: aria2 wget git diff-so-fancy proxychains-ng tig zsh z tmux"
-brew install aria2 wget curl git diff-so-fancy proxychains-ng tig zsh z tmux
+echo "== Will install: aria2 wget git diff-so-fancy proxychains-ng tig zsh z tmux nvm yarn"
+brew install aria2 wget curl git diff-so-fancy proxychains-ng tig zsh z tmux nvm yarn
 checkError "command line tool"
 
 # oh my zsh
@@ -64,8 +54,8 @@ checkError "homebrew-cask"
 
 # software
 echo -e "\n\n==== Software ====\n\n"
-echo "== Will install: alfred iterm2 vscode google-chrome aliwangwang skitch appcleaner jitouch licecap mplayerx biaduinput skype youdao sourcetree insomniax qq spectacle shadowsocksx the-unarchiver java"
-brew cask install alfred iterm2 visual-studio-code google-chrome aliwangwang skitch appcleaner jitouch licecap mplayerx biaduinput skype youdao sourcetree insomniax qq spectacle shadowsocksx the-unarchiver java
+echo "== Will install: iterm2 vscode google-chrome aliwangwang skitch appcleaner jitouch licecap iina skype sublime-merge insomniax qq spectacle shadowsocksx the-unarchiver java ngrok wechat slack send-anywhere adobe-acrobat-reader"
+brew cask install iterm2 visual-studio-code google-chrome aliwangwang skitch appcleaner jitouch licecap iina skype sublime-merge insomniax qq spectacle shadowsocksx the-unarchiver java ngrok wechat slack send-anywhere adobe-acrobat-reader
 checkError "Software"
 
 echo "3. SSH keygen"
