@@ -54,8 +54,8 @@ checkError "homebrew-cask"
 
 # software
 echo -e "\n\n==== Software ====\n\n"
-echo "== Will install: iterm2 vscode google-chrome aliwangwang skitch appcleaner jitouch licecap iina skype sublime-merge insomniax qq spectacle shadowsocksx the-unarchiver java ngrok wechat slack send-anywhere adobe-acrobat-reader"
-brew cask install iterm2 visual-studio-code google-chrome aliwangwang skitch appcleaner jitouch licecap iina skype sublime-merge insomniax qq spectacle shadowsocksx the-unarchiver java ngrok wechat slack send-anywhere adobe-acrobat-reader
+echo "== Will install: iterm2 vscode google-chrome aliwangwang skitch appcleaner jitouch licecap iina skype sublime-merge insomniax qq spectacle shadowsocksx the-unarchiver java ngrok wechat slack send-anywhere adobe-acrobat-reader baiduinput"
+brew cask install iterm2 visual-studio-code google-chrome aliwangwang skitch appcleaner jitouch licecap iina skype sublime-merge insomniax qq spectacle shadowsocksx the-unarchiver java ngrok wechat slack send-anywhere adobe-acrobat-reader baiduinput
 checkError "Software"
 
 echo "3. SSH keygen"
