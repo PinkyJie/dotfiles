@@ -88,6 +88,13 @@ ln -s ~/.dotfiles/git/gitignore_global ~/.gitignore_global
 ln -s ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
 
 # vscode
+
+# run VSCode once to generate User folder
+code &
+vscode_pid=$!
+sleep 1s
+kill -9 $vscode_pid
+
 rm -rf ~/Library/Application\ Support/Code/User
 ln -s ~/.dotfiles/vscode/User ~/Library/Application\ Support/Code/User
 echo "== Install vscode plugins"
