@@ -98,7 +98,7 @@ kill -9 $vscode_pid
 rm -rf ~/Library/Application\ Support/Code/User
 ln -s ~/.dotfiles/vscode/User ~/Library/Application\ Support/Code/User
 echo "== Install vscode plugins"
-cat ~/.dotfiles/vscode/extension.list | xargs -L 1 code-insiders --install-extension
+cat ~/.dotfiles/vscode/extension.list | xargs -L 1 code --install-extension
 
 # aria2
 mkdir ~/.aria2
