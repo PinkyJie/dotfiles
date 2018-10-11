@@ -38,8 +38,6 @@ export LC_CTYPE=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 # Virtual Environment Stuff
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Projects/python
 if [[ $HAS_VIRTUALENV -eq 1 ]]; then
     source /usr/local/bin/virtualenvwrapper.sh
 fi

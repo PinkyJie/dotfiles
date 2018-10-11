@@ -1,15 +1,4 @@
 # -------------------------------------------------------------------
-# Chef functions
-# -------------------------------------------------------------------
-function knhost() {
-  sed -e 's/.*://' -e 's/.*items found//'
-}
-
-function knaws() {
-  knife search node "tags:$*" -a cloud.public_hostname | knhost
-}
-
-# -------------------------------------------------------------------
 # compressed file expander
 # (from https://github.com/myfreeweb/zshuery/blob/master/zshuery.sh)
 # -------------------------------------------------------------------
