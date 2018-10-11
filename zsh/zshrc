@@ -23,3 +23,6 @@ if [ -f '/Users/wenbo/google-cloud-sdk/completion.zsh.inc' ]; then source '/User
 
 export NVM_DIR="$HOME/.nvm"
 . "/usr/local/opt/nvm/nvm.sh"
+
+fpath=(/usr/local/share/zsh/site-functions $fpath)
+

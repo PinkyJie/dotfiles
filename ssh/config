@@ -1,6 +1,0 @@
-# bwg vps
-host bwg
-    HostName 192.243.118.44 
-    User root
-    Port 26780
-
