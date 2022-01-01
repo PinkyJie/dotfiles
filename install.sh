@@ -45,12 +45,10 @@ checkError "oh-my-zsh"
 # zsh-autosugesstion
 git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 
-echo "2. Install homebrew-cask"
+echo "2. Deep clone homebrew"
 echo "----------"
-
-# homebrew-cask
-brew tap caskroom/cask
-checkError "homebrew-cask"
+ git -C /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core fetch --unshallow
+ git -C /usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask fetch --unshallow
 
 # software
 echo -e "\n\n==== Software ====\n\n"

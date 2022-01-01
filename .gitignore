@@ -4,4 +4,7 @@
 *.log
 
 # vscode
-/vscode/User/workspaceStorage
+/vscode/User
+!/vscode/User/snippets
+!/vscode/User/keybindings.json
+!/vscode/User/settings.json

@@ -74,7 +74,7 @@ fi
 #alias s='subl -n .'
 alias p='cd ~/Projects'
 alias v='vim'
-alias bu='brew update; brew upgrade; brew upgrade caskroom/cask/brew-cask; brew cleanup; brew doctor'
+alias bu='brew update; brew upgrade; brew cleanup; brew doctor'
 alias wifi="networksetup -setairportpower en0"
 alias makepass="openssl rand -base64 12"
 
@@ -167,9 +167,3 @@ alias please='sudo !!'
 
 # proxy for console
 alias gfw='proxychains4'
-
-# alias for cnpm
-alias cnpm="npm --registry=https://registry.npm.taobao.org \
---cache=$HOME/.npm/.cache/cnpm \
---disturl=https://npm.taobao.org/dist \
---userconfig=$HOME/.cnpmrc"

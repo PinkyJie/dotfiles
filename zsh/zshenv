@@ -4,10 +4,4 @@ if [ -x /usr/libexec/path_helper ]; then
     eval `/usr/libexec/path_helper -s`
 fi
 
-# Put Homebrew at the head of the path
-# /usr/local/bin is also first in /etc/paths
-export PATH="/usr/local/bin:$PATH"
-
-# Add Node local module folder
-export PATH="./node_modules/.bin:$PATH"
 
