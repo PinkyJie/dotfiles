@@ -1,69 +1,54 @@
 #!/bin/bash
 
-echo "----------"
-echo "This script will help you setup your development environment."
-echo "Make sure you have already installed Xcode tool: xcode-select --install"
-echo "Press Enter to continue."
-echo "----------"
-echo
+source ./_utils.sh
+
+print_header "----------"
+print_header "This script will help you setup your development environment."
+print_header "Make sure you have already installed Xcode tool: xcode-select --install"
+print_header "Press Enter to continue."
+print_header "----------"
 
 read user_action
 if [ ! -z $user_action ]; then
-  echo "== Exit!"
+  print_header "-- Exit!"
   exit 0
 fi
 
-checkError() {
-  if [ $? -eq 0 ]; then
-    echo "== Install $1: success!"
-    echo
-  else
-    echo "== Install $1: fail!"
-    echo "== Exit!"
-    exit 1
-  fi
-}
-
-echo "1. Install Homebrew"
-echo "----------"
-
+print_header "1. Install Homebrew"
 # homebrew
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 checkError "homebrew"
 
-# common command line tool
-echo -e "\n\n==== Command Line Tool ====\n\n"
-echo "== Will install: aria2 wget git diff-so-fancy proxychains-ng tig zsh z tmux nvm yarn"
-brew install aria2 wget curl git diff-so-fancy proxychains-ng tig zsh z tmux nvm yarn
-checkError "command line tool"
+# cli tools
+print_header "-- Homebrew CLI tools"
+brew install git diff-so-fancy tig nvm fzf zsh-autosuggestions
+checkError "homebrew cli tools"
 
+# fzf keybindings
+print_header "-- fzf keybindings"
+$(brew --prefix)/opt/fzf/install
+
+# apps
+print_header "-- Homebrew apps"
+brew install --cask warp iterm2 visual-studio-code google-chrome appcleaner iina
+checkError "homebrew apps"
+
+print_header "2. Oh My Zsh"
 # oh my zsh
-cur_path=`pwd`
-git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 checkError "oh-my-zsh"
 
-# zsh-autosugesstion
-git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+# zsh theme
+print_header "-- PowerLevel10k theme"
+brew install romkatv/powerlevel10k/powerlevel10k
+checkError "zsh theme"
 
-echo "2. Deep clone homebrew"
-echo "----------"
- git -C /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core fetch --unshallow
- git -C /usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask fetch --unshallow
-
-# software
-echo -e "\n\n==== Software ====\n\n"
-echo "== Will install: iterm2 vscode google-chrome aliwangwang skitch appcleaner jitouch licecap iina skype sublime-merge insomniax qq spectacle shadowsocksx the-unarchiver java ngrok wechat slack send-anywhere adobe-acrobat-reader baiduinput"
-brew cask install iterm2 visual-studio-code google-chrome aliwangwang skitch appcleaner jitouch licecap iina skype sublime-merge insomniax qq spectacle shadowsocksx the-unarchiver java ngrok wechat slack send-anywhere adobe-acrobat-reader baiduinput
-checkError "Software"
-
-echo "3. SSH keygen"
-echo "----------"
+print_header "3. SSH keygen"
 ssh-keygen -t rsa -b 4096 -C pinkyjie.gn@gmail.com
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_rsa
 
-echo "4. Config soft link"
-echo "----------"
+print_header "4. Config soft link"
 
 # zsh
 rm -f ~/.zsh ~/.zhsrc ~/.zshenv ~/.zprofile
@@ -80,12 +65,6 @@ ln -s ~/.dotfiles/ssh/config ~/.ssh/config
 
 # git
 ln -s ~/.dotfiles/git/gitconfig ~/.gitconfig
-ln -s ~/.dotfiles/git/gitignore_global ~/.gitignore_global
-
-# tmux
-ln -s ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
-
-# vscode
 
 # run VSCode once to generate User folder
 code &
@@ -93,22 +72,10 @@ vscode_pid=$!
 sleep 1s
 kill -9 $vscode_pid
 
+# vscode
 rm -rf ~/Library/Application\ Support/Code/User
 ln -s ~/.dotfiles/vscode/User ~/Library/Application\ Support/Code/User
-echo "== Install vscode plugins"
+print_header "-- Install vscode plugins"
 cat ~/.dotfiles/vscode/extension.list | xargs -L 1 code --install-extension
 
-# aria2
-mkdir ~/.aria2
-ln -s ~/.dotfiles/aria2/aria2.conf ~/.aria2/aria2.conf
-
-# proxychains
-mkdir ~/.proxychains
-ln -s ~/.dotfiles/proxychains/proxychains.conf ~/.proxychains/proxychains.conf
-
-checkError "soft link"
-
-echo "5. Switch Shell to zsh"
-chsh -s /bin/zsh
-
-echo -e "\n\n== All Done!"
+print_header "\n\nAll Done!"

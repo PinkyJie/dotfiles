@@ -7,58 +7,18 @@
   "editor.wordWrap": "on",
   "editor.wrappingIndent": "indent",
   "window.zoomLevel": 0,
-  "gitlens.advanced.messages": {
-    "suppressCommitHasNoPreviousCommitWarning": false,
-    "suppressCommitNotFoundWarning": false,
-    "suppressFileNotUnderSourceControlWarning": false,
-    "suppressGitVersionWarning": false,
-    "suppressLineUncommittedWarning": false,
-    "suppressNoRepositoryWarning": false,
-  },
-  "gitlens.keymap": "alternate",
   "explorer.confirmDelete": false,
-  "cSpell.userWords": [
-    "assist",
-    "backend",
-    "count",
-    "devtool",
-    "dynamodb",
-    "local",
-    "prisma",
-    "reprompt",
-    "serverless",
-    "unmount",
-    "voice"
-  ],
   "workbench.startupEditor": "newUntitledFile",
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll": true
   },
-  "yaml.customTags": [
-    "!And",
-    "!If",
-    "!Not",
-    "!Equals",
-    "!Or",
-    "!FindInMap",
-    "!Base64",
-    "!Cidr",
-    "!Ref",
-    "!Sub",
-    "!GetAtt",
-    "!GetAZs",
-    "!ImportValue",
-    "!Select",
-    "!Split",
-    "!Join"
-  ],
   "typescript.updateImportsOnFileMove.enabled": "always",
   "javascript.updateImportsOnFileMove.enabled": "always",
-  "go.formatTool": "goimports",
-  "[typescript]": {
+  "workbench.colorTheme": "One Dark Pro Flat",
+  "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "workbench.colorTheme": "One Dark Pro Flat",
-  "redhat.telemetry.enabled": false
+  "security.workspace.trust.untrustedFiles": "open",
+  "terminal.integrated.defaultProfile.linux": "zsh"
 }

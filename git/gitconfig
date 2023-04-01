@@ -1,72 +1,25 @@
 [user]
-	name = Wenbo Jie
+    name = Wenbo Jie
     email = pinkyjie.gn@gmail.com
 
 [color]
     ui = auto
     interactive = auto
 
-[color "branch"]
-    current = yellow reverse
-    local = yellow
-    remote = green
-
-[color "diff"]
-    meta = yellow bold
-    frag = magenta bold
-    old = red bold
-    new = green bold
-
-[color "status"]
-    added = green
-    changed = magenta
-    untracked = bold yellow
-
 [core]
     editor = vim
     autocrlf = input
     safecrlf = warn
-	excludesfile = /Users/wenbo/.gitignore_global
     quotepath = false
 
-[diff]
-    tool = vimdiff
-
-[merge]
-    # Include summaries of merged commits in newly created merge commit
-    # messages
-    log = true
-    tool = vimdiff
-
 [alias]
-    yolo = 'git commit -am "DEAL WITH IT" && git push -f origin master'
-    hist = "log --graph --pretty=format:'%Cred%h%Creset %d %s %Cgreen(%cr)%Creset %Cblue[%an]%Creset' --abbrev-commit --date=relative"
-    ahead = "log @{u}...HEAD --graph --decorate --left-right --boundary --pretty=format:'%Cred%h%Creset %d %s %Cgreen(%cr)%Creset %Cblue[%an]%Creset' --abbrev-commit --date=relative"
-    today = "log --stat --since='1 Day Ago' --graph --pretty=oneline --abbrev-commit --date=relative"
+    mp = map-branches -vvv
     # Show verbose output about tags, branches, or remotes
     tags = tag -l
     branches = branch -a
     remotes = remote -v
-    [alias]
-    prev = checkout HEAD^1
-    next = "!sh -c 'git log --reverse --pretty=%H master | awk \"/$(git rev-parse HEAD)/{getline;print}\" | xargs git checkout'"
-
 
 [push]
     # simple is the new default, requires > 1.7
     # default = simple
     default = matching
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
-
-[filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
-	required = true
-[pager]
-	diff = diff-so-fancy | less --tabs=1,5 -RFX
-	show = diff-so-fancy | less --tabs=1,5 -RFX

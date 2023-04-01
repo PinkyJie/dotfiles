@@ -3,14 +3,13 @@ Host pi
     User pi
 
 Host lgtv
-    HostName 192.168.5.80
+    HostName 192.168.5.28
     User root
 
-Host amd-ubuntu
-    HostName 152.67.103.44
+Host oci
+    HostName 192.9.179.70
     User ubuntu
-    RemoteForward 2222 192.168.5.80:22
 
-Host arm-ubuntu
-    HostName 150.230.10.221
-    User ubuntu
+Host pi4
+    HostName 192.168.5.235
+    User wenbo
