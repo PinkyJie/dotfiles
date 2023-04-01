@@ -1,0 +1,159 @@
+version: '3.0'
+
+services:
+  # Manage docker containers.
+  portainer:
+    container_name: portainer
+    image: portainer/portainer-ce
+    restart: always
+    ports:
+      - "9000:9000/tcp"
+    environment:
+      - TZ=Australia/Sydney
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./portainer:/data
+  # Manage smart devices.
+  homeassistant:
+    container_name: homeassistant
+    image: "ghcr.io/home-assistant/home-assistant:stable"
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - ./homeassistant/config:/config
+      - /etc/localtime:/etc/localtime:ro
+    privileged: true
+  # DNS based ad blocker.
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    restart: unless-stopped
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "8091:80/tcp"
+    environment:
+      - TZ=Australia/Sydney
+    volumes:
+      - ./pihole/config:/etc/pihole
+      - ./pihole/dnsmasq.d:/etc/dnsmasq.d
+  # For Zigbee devices.
+  mqtt:
+    container_name: mqtt
+    image: eclipse-mosquitto
+    restart: unless-stopped
+    volumes:
+      - ./mosquitto:/mosquitto
+    ports:
+      - 1883:1883
+      - 9001:9001
+    command: "mosquitto -c /mosquitto-no-auth.conf"
+  # For Zigbee devices to communicate with MQTT.
+  zigbee2mqtt:
+    container_name: zigbee2mqtt
+    image: koenkk/zigbee2mqtt
+    restart: unless-stopped
+    volumes:
+      - ./zigbee2mqtt:/app/data
+      - /run/udev:/run/udev:ro
+    ports:
+      - 8080:8080
+    environment:
+      - TZ=Australia/Sydney
+    devices:
+      - /dev/ttyUSB0:/dev/ttyUSB0
+  # Update docker images automatically.
+  watchtower:
+    container_name: watchtower
+    image: containrrr/watchtower
+    environment:
+      - WATCHTOWER_CLEANUP=true
+      - TZ=Australia/Sydney
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  # Home dashboard.
+  homarr:
+    container_name: homarr
+    image: ghcr.io/ajnart/homarr:latest
+    restart: unless-stopped
+    volumes:
+      - ./homarr/configs:/app/data/configs
+      - ./homarr/icons:/app/public/icons
+    ports:
+      - 80:7575
+  # Download and manage movies.
+  nas-tools:
+    container_name: nas-tools
+    image: jxxghp/nas-tools
+    restart: always
+    network_mode: bridge
+    hostname: nas-tools
+    ports:
+      - 3000:3000
+    volumes:
+      - ./nas-tool:/config
+      - ./pi-nas:/media/pi-nas
+    environment:
+      - PUID=1000
+      - PGID=100
+      - UMASK=022
+      - TZ=Australia/Sydney
+  # Manage download.
+  transmission:
+    container_name: transmission
+    image: lscr.io/linuxserver/transmission:latest
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=100
+      - TZ=Australia/Sydney
+      - USER=wenbo
+      - PASS=123
+    volumes:
+      - ./transmission/config:/config
+      - ./pi-nas/downloads:/media/pi-nas/downloads
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
+  # Media library.
+  jellyfin:
+    container_name: jellyfin
+    image: jellyfin/jellyfin
+    restart: unless-stopped
+    environment:
+      - UID=1000
+      - GID=100
+      - GIDLIST=100
+      - TZ=Australia/Sydney
+    volumes:
+      - ./jellyfin/config:/config
+      - ./jellyfin/cache:/cache
+      - ./pi-nas/library:/media
+      - ./pi-nas/family:/media-family
+    ports:
+      - 8096:8096
+  # Download chinese subtitle.
+  chinesesubfinder:
+    container_name: chinesesubfinder
+    image: allanpk716/chinesesubfinder
+    network_mode: bridge
+    hostname: chinesesubfinder
+    restart: always
+    volumes:
+      - ./subfinder/config:/config
+      - ./subfinder/cache:/app/cache
+      - ./pi-nas/library:/media
+      - ./subfinder/chrome:/root/.cache/rod/browser
+    environment:
+      - PUID=1000
+      - PGID=100
+      - TZ=Australia/Sydney
+      - UMASK=022
+    ports:
+      - 19035:19035
+      - 19037:19037
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
