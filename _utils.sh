@@ -8,7 +8,7 @@ function print_header() {
     echo "${blue}${text}${normal}"
 }
 
-function checkError() {
+function check_error() {
   if [ $? -eq 0 ]; then
     print_header "-- Install $1: success!"
   else
