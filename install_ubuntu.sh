@@ -53,4 +53,4 @@ ln -s ~/.dotfiles/git/gitconfig ~/.gitconfig
 print_header "5. Change default shell to zsh"
 sudo chsh -s $(which zsh) ubuntu
 
-print_header "\n\nAll Done!"
+print_header "All Done!"

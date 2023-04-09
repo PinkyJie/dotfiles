@@ -16,12 +16,12 @@ fi
 
 print_header "1. Install Homebrew"
 # homebrew
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 check_error "homebrew"
 
 # cli tools
 print_header "-- Homebrew CLI tools"
-brew install git diff-so-fancy tig nvm fzf zsh-autosuggestions
+brew install zsh git diff-so-fancy tig nvm fzf zsh-autosuggestions
 check_error "homebrew cli tools"
 
 # fzf keybindings
@@ -35,7 +35,7 @@ check_error "homebrew apps"
 
 print_header "2. Oh My Zsh"
 # oh my zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 check_error "oh-my-zsh"
 
 # zsh theme
@@ -51,7 +51,7 @@ ssh-add ~/.ssh/id_rsa
 print_header "4. Config soft link"
 
 # zsh
-rm -f ~/.zsh ~/.zhsrc
+rm -rf ~/.zsh ~/.zhsrc
 ln -s ~/.dotfiles/zsh ~/.zsh
 ln -s ~/.dotfiles/zsh/zshrc ~/.zshrc
 
@@ -73,4 +73,4 @@ ln -s ~/.dotfiles/vscode/User ~/Library/Application\ Support/Code/User
 print_header "-- Install vscode plugins"
 cat ~/.dotfiles/vscode/extension.list | xargs -L 1 code --install-extension
 
-print_header "\n\nAll Done!"
+print_header "All Done!"
