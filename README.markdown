@@ -17,6 +17,7 @@ git clone git://github.com/PinkyJie/dotfiles.git ~/.dotfiles
 - Adjust dock configuration.
   - Move the "Dock Size" slider to make it smaller.
   - Enable "Automatically hide and show the dock".
+  - Disable "Show recent applications in Dock".
 - Modify the touchpad settings.
   - In `System Preferences -> Touchpad`:
     - Enable `Tap to click` in "Point & Click".

@@ -1,29 +1,230 @@
-version: '3.0'
+version: "3"
+networks:
+  network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.128.2.0/24
 
 services:
-  # Manage docker containers.
-  portainer:
-    container_name: portainer
-    image: portainer/portainer-ce
-    restart: always
-    ports:
-      - "9000:9000/tcp"
+  heimdall:
+    image: linuxserver/heimdall:2.5.4
+    container_name: heimdall
+    restart: unless-stopped
     environment:
-      - TZ=Australia/Sydney
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_PATH}/heimdall:/config
+    ports:
+      - 60211:443
+    networks:
+      network:
+        ipv4_address: 172.128.2.11
+
+  portainer:
+    image: 6053537/portainer-ce:latest
+    container_name: portainer
+    restart: unless-stopped
+    environment:
+      - TZ={TZ}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./portainer:/data
-  # Manage smart devices.
+      - ${CONFIG_PATH}/portainer:/data
+    ports:
+      - 60212:9000
+    networks:
+      network:
+        ipv4_address: 172.128.2.12
+
+  flaresolverr:
+    image: flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    restart: unless-stopped
+    environment:
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - LOG_HTML=${LOG_HTML:-false}
+      - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    ports:
+      - 60213:8191
+    networks:
+      network:
+        ipv4_address: 172.128.2.13
+
+  jackett:
+    image: linuxserver/jackett:latest
+    container_name: jackett
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_PATH}/jackett:/config
+    ports:
+      - 60214:9117
+    networks:
+      network:
+        ipv4_address: 172.128.2.14
+
+  jproxy:
+    image: luckypuppy514/jproxy:latest
+    container_name: jproxy
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - JAVA_OPTS=-Xms512m -Xmx512m
+    volumes:
+      - ${CONFIG_PATH}/jproxy/database:/app/database
+    ports:
+      - 60215:8117
+    networks:
+      network:
+        ipv4_address: 172.128.2.15
+
+  jellyseerr:
+    image: fallenbagel/jellyseerr:latest
+    container_name: jellyseerr
+    restart: unless-stopped
+    environment:
+      - LOG_LEVEL=info
+      - JELLYFIN_TYPE=emby
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_PATH}/jellyseerr:/app/config
+    ports:
+      - 60216:5055
+    networks:
+      network:
+        ipv4_address: 172.128.2.16
+    depends_on:
+      - sonarr
+      - radarr
+
+  radarr:
+    image: linuxserver/radarr:latest
+    container_name: radarr
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_PATH}/radarr:/config
+      - ${MEDIA_PATH}/video:/media/video
+    ports:
+      - 60217:7878
+    networks:
+      network:
+        ipv4_address: 172.128.2.17
+    depends_on:
+      - jproxy
+      - qbittorrent
+
+  sonarr:
+    image: linuxserver/sonarr:latest
+    container_name: sonarr
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_PATH}/sonarr:/config
+      - ${MEDIA_PATH}/video:/media/video
+    ports:
+      - 60218:8989
+    networks:
+      network:
+        ipv4_address: 172.128.2.18
+    depends_on:
+      - jproxy
+      - qbittorrent
+
+  qbittorrent:
+    image: linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - WEBUI_PORT=60219
+    volumes:
+      - ${CONFIG_PATH}/qbittorrent:/config
+      - ${MEDIA_PATH}/video:/media/video
+    ports:
+      - 60219:60219
+      - 60881:6881
+      - 60881:6881/udp
+    networks:
+      network:
+        ipv4_address: 172.128.2.19
+
+  chinesesubfinder:
+    image: allanpk716/chinesesubfinder:latest-lite
+    container_name: chinesesubfinder
+    restart: unless-stopped
+    volumes:
+      - ${CONFIG_PATH}/chinesesubfinder:/config
+      - ${MEDIA_PATH}/video:/media/video
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - PERMS=true
+      - UMASK=022
+    hostname: chinesesubfinder
+    ports:
+      - 60221:19035
+      - 19037:19037
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+    networks:
+      network:
+        ipv4_address: 172.128.2.21
+
+  emby:
+    image: lovechen/embyserver:latest
+    container_name: emby
+    restart: unless-stopped
+    environment:
+      - UID=0
+      - GID=0
+      - GIDLIST=0
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_PATH}/emby:/config
+      - ${MEDIA_PATH}/video:/media/video
+      - ${MEDIA_PATH}/family:/media/family
+    ports:
+      - 60220:8096
+    networks:
+      network:
+        ipv4_address: 172.128.2.20
+    devices:
+      - /dev/vchiq:/dev/vchiq
+
   homeassistant:
     container_name: homeassistant
     image: "ghcr.io/home-assistant/home-assistant:stable"
     network_mode: host
     restart: unless-stopped
     volumes:
-      - ./homeassistant/config:/config
+      - ${CONFIG_PATH}/homeassistant/config:/config
       - /etc/localtime:/etc/localtime:ro
     privileged: true
-  # DNS based ad blocker.
+
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
@@ -33,127 +234,32 @@ services:
       - "53:53/udp"
       - "8091:80/tcp"
     environment:
-      - TZ=Australia/Sydney
+      - TZ=${TZ}
     volumes:
-      - ./pihole/config:/etc/pihole
-      - ./pihole/dnsmasq.d:/etc/dnsmasq.d
-  # For Zigbee devices.
+      - ${CONFIG_PATH}/pihole/config:/etc/pihole
+      - ${CONFIG_PATH}/pihole/dnsmasq.d:/etc/dnsmasq.d
+
   mqtt:
     container_name: mqtt
     image: eclipse-mosquitto
     restart: unless-stopped
     volumes:
-      - ./mosquitto:/mosquitto
+      - ${CONFIG_PATH}/mosquitto:/mosquitto
     ports:
       - 1883:1883
       - 9001:9001
     command: "mosquitto -c /mosquitto-no-auth.conf"
-  # For Zigbee devices to communicate with MQTT.
+
   zigbee2mqtt:
     container_name: zigbee2mqtt
     image: koenkk/zigbee2mqtt
     restart: unless-stopped
     volumes:
-      - ./zigbee2mqtt:/app/data
+      - ${CONFIG_PATH}/zigbee2mqtt:/app/data
       - /run/udev:/run/udev:ro
     ports:
       - 8080:8080
     environment:
-      - TZ=Australia/Sydney
+      - TZ=${TZ}
     devices:
       - /dev/ttyUSB0:/dev/ttyUSB0
-  # Update docker images automatically.
-  watchtower:
-    container_name: watchtower
-    image: containrrr/watchtower
-    environment:
-      - WATCHTOWER_CLEANUP=true
-      - TZ=Australia/Sydney
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-  # Home dashboard.
-  homarr:
-    container_name: homarr
-    image: ghcr.io/ajnart/homarr:latest
-    restart: unless-stopped
-    volumes:
-      - ./homarr/configs:/app/data/configs
-      - ./homarr/icons:/app/public/icons
-    ports:
-      - 80:7575
-  # Download and manage movies.
-  nas-tools:
-    container_name: nas-tools
-    image: jxxghp/nas-tools
-    restart: always
-    network_mode: bridge
-    hostname: nas-tools
-    ports:
-      - 3000:3000
-    volumes:
-      - ./nas-tool:/config
-      - ./pi-nas:/media/pi-nas
-    environment:
-      - PUID=1000
-      - PGID=100
-      - UMASK=022
-      - TZ=Australia/Sydney
-  # Manage download.
-  transmission:
-    container_name: transmission
-    image: lscr.io/linuxserver/transmission:latest
-    restart: unless-stopped
-    environment:
-      - PUID=1000
-      - PGID=100
-      - TZ=Australia/Sydney
-      - USER=wenbo
-      - PASS=123
-    volumes:
-      - ./transmission/config:/config
-      - ./pi-nas/downloads:/media/pi-nas/downloads
-    ports:
-      - 9091:9091
-      - 51413:51413
-      - 51413:51413/udp
-  # Media library.
-  jellyfin:
-    container_name: jellyfin
-    image: jellyfin/jellyfin
-    restart: unless-stopped
-    environment:
-      - UID=1000
-      - GID=100
-      - GIDLIST=100
-      - TZ=Australia/Sydney
-    volumes:
-      - ./jellyfin/config:/config
-      - ./jellyfin/cache:/cache
-      - ./pi-nas/library:/media
-      - ./pi-nas/family:/media-family
-    ports:
-      - 8096:8096
-  # Download chinese subtitle.
-  chinesesubfinder:
-    container_name: chinesesubfinder
-    image: allanpk716/chinesesubfinder
-    network_mode: bridge
-    hostname: chinesesubfinder
-    restart: always
-    volumes:
-      - ./subfinder/config:/config
-      - ./subfinder/cache:/app/cache
-      - ./pi-nas/library:/media
-      - ./subfinder/chrome:/root/.cache/rod/browser
-    environment:
-      - PUID=1000
-      - PGID=100
-      - TZ=Australia/Sydney
-      - UMASK=022
-    ports:
-      - 19035:19035
-      - 19037:19037
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "100m"
