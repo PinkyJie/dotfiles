@@ -29,5 +29,5 @@ if [[ $IS_LINUX -eq 1 ]]; then
     source /usr/share/doc/fzf/examples/completion.zsh
 
     # zsh-autosuggestions
-     source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi

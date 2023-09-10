@@ -3,7 +3,7 @@ Host pi
     User pi
 
 Host lgtv
-    HostName 192.168.5.28
+    HostName 192.168.5.30
     User root
 
 Host oci
@@ -11,5 +11,5 @@ Host oci
     User ubuntu
 
 Host pi4
-    HostName 192.168.5.235
+    HostName 192.168.5.36
     User wenbo

@@ -263,3 +263,12 @@ services:
       - TZ=${TZ}
     devices:
       - /dev/ttyUSB0:/dev/ttyUSB0
+
+  xiaoya:
+    container_name: xiaoya
+    image: xiaoyaliu/alist:latest
+    restart: always
+    volumes:
+      - ${CONFIG_PATH}/xiaoya:/data
+    ports:
+      - 5678:80
