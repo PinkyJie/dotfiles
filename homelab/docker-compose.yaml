@@ -224,6 +224,8 @@ services:
       - ${CONFIG_PATH}/homeassistant/config:/config
       - /etc/localtime:/etc/localtime:ro
     privileged: true
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
 
   pihole:
     container_name: pihole
@@ -238,6 +240,8 @@ services:
     volumes:
       - ${CONFIG_PATH}/pihole/config:/etc/pihole
       - ${CONFIG_PATH}/pihole/dnsmasq.d:/etc/dnsmasq.d
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
 
   mqtt:
     container_name: mqtt
@@ -249,6 +253,8 @@ services:
       - 1883:1883
       - 9001:9001
     command: "mosquitto -c /mosquitto-no-auth.conf"
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
 
   zigbee2mqtt:
     container_name: zigbee2mqtt
@@ -263,6 +269,8 @@ services:
       - TZ=${TZ}
     devices:
       - /dev/ttyUSB0:/dev/ttyUSB0
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
 
   xiaoya:
     container_name: xiaoya
@@ -271,4 +279,16 @@ services:
     volumes:
       - ${CONFIG_PATH}/xiaoya:/data
     ports:
-      - 5678:80
+      - 80:80
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
+  watchtower:
+    container_name: watchtower
+    image: containrrr/watchtower
+    environment:
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_LABEL_ENABLE=true
+      - TZ=${TZ}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
