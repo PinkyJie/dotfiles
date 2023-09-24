@@ -29,5 +29,9 @@
     "editor.tabCompletion": "onlySnippets",
     "editor.wordBasedSuggestions": false
   },
-  "dart.openDevTools": "flutter"
+  "dart.openDevTools": "flutter",
+  "application.shellEnvironmentResolutionTimeout": 30,
+  "bazel.buildifierFixOnFormat": true,
+  "bazel.enableCodeLens": true,
+  "bazel.queriesShareServer": true
 }

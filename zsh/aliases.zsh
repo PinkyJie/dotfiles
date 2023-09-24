@@ -5,4 +5,7 @@ if [[ $IS_MAC -eq 1 ]]; then
     alias bu='brew update; brew upgrade; brew cleanup; brew doctor'
 fi
 
-alias scp-docker="scp ~/.dotfiles/homelab/docker-compose.yaml wenbo@pi4:~/docker/docker-compose.yml"
+function scp-docker() {
+    scp ~/.dotfiles/homelab/.env wenbo@pi4:~/docker/.env
+    scp ~/.dotfiles/homelab/docker-compose.yaml wenbo@pi4:~/docker/docker-compose.yml
+}

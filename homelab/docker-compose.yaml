@@ -38,173 +38,17 @@ services:
       network:
         ipv4_address: 172.128.2.12
 
-  flaresolverr:
-    image: flaresolverr/flaresolverr:latest
-    container_name: flaresolverr
-    restart: unless-stopped
-    environment:
-      - LOG_LEVEL=${LOG_LEVEL:-info}
-      - LOG_HTML=${LOG_HTML:-false}
-      - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-    ports:
-      - 60213:8191
-    networks:
-      network:
-        ipv4_address: 172.128.2.13
-
-  jackett:
-    image: linuxserver/jackett:latest
-    container_name: jackett
-    restart: unless-stopped
-    environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-    volumes:
-      - ${CONFIG_PATH}/jackett:/config
-    ports:
-      - 60214:9117
-    networks:
-      network:
-        ipv4_address: 172.128.2.14
-
-  jproxy:
-    image: luckypuppy514/jproxy:latest
-    container_name: jproxy
-    restart: unless-stopped
-    environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-      - JAVA_OPTS=-Xms512m -Xmx512m
-    volumes:
-      - ${CONFIG_PATH}/jproxy/database:/app/database
-    ports:
-      - 60215:8117
-    networks:
-      network:
-        ipv4_address: 172.128.2.15
-
-  jellyseerr:
-    image: fallenbagel/jellyseerr:latest
-    container_name: jellyseerr
-    restart: unless-stopped
-    environment:
-      - LOG_LEVEL=info
-      - JELLYFIN_TYPE=emby
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-    volumes:
-      - ${CONFIG_PATH}/jellyseerr:/app/config
-    ports:
-      - 60216:5055
-    networks:
-      network:
-        ipv4_address: 172.128.2.16
-    depends_on:
-      - sonarr
-      - radarr
-
-  radarr:
-    image: linuxserver/radarr:latest
-    container_name: radarr
-    restart: unless-stopped
-    environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-    volumes:
-      - ${CONFIG_PATH}/radarr:/config
-      - ${MEDIA_PATH}/video:/media/video
-    ports:
-      - 60217:7878
-    networks:
-      network:
-        ipv4_address: 172.128.2.17
-    depends_on:
-      - jproxy
-      - qbittorrent
-
-  sonarr:
-    image: linuxserver/sonarr:latest
-    container_name: sonarr
-    restart: unless-stopped
-    environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-    volumes:
-      - ${CONFIG_PATH}/sonarr:/config
-      - ${MEDIA_PATH}/video:/media/video
-    ports:
-      - 60218:8989
-    networks:
-      network:
-        ipv4_address: 172.128.2.18
-    depends_on:
-      - jproxy
-      - qbittorrent
-
-  qbittorrent:
-    image: linuxserver/qbittorrent:latest
-    container_name: qbittorrent
-    restart: unless-stopped
-    environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-      - WEBUI_PORT=60219
-    volumes:
-      - ${CONFIG_PATH}/qbittorrent:/config
-      - ${MEDIA_PATH}/video:/media/video
-    ports:
-      - 60219:60219
-      - 60881:6881
-      - 60881:6881/udp
-    networks:
-      network:
-        ipv4_address: 172.128.2.19
-
-  chinesesubfinder:
-    image: allanpk716/chinesesubfinder:latest-lite
-    container_name: chinesesubfinder
-    restart: unless-stopped
-    volumes:
-      - ${CONFIG_PATH}/chinesesubfinder:/config
-      - ${MEDIA_PATH}/video:/media/video
-    environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-      - PERMS=true
-      - UMASK=022
-    hostname: chinesesubfinder
-    ports:
-      - 60221:19035
-      - 19037:19037
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "100m"
-    networks:
-      network:
-        ipv4_address: 172.128.2.21
-
-  emby:
-    image: lovechen/embyserver:latest
-    container_name: emby
+  jellyfin:
+    image: jellyfin/jellyfin
+    container_name: jellyfin
     restart: unless-stopped
     environment:
       - UID=0
       - GID=0
-      - GIDLIST=0
       - TZ=${TZ}
     volumes:
-      - ${CONFIG_PATH}/emby:/config
+      - ${CONFIG_PATH}/jellyfin/config:/config
+      - ${CONFIG_PATH}/jellyfin/cache:/cache
       - ${MEDIA_PATH}/video:/media/video
       - ${MEDIA_PATH}/family:/media/family
     ports:
@@ -212,8 +56,8 @@ services:
     networks:
       network:
         ipv4_address: 172.128.2.20
-    devices:
-      - /dev/vchiq:/dev/vchiq
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
 
   homeassistant:
     container_name: homeassistant
@@ -275,20 +119,54 @@ services:
   xiaoya:
     container_name: xiaoya
     image: xiaoyaliu/alist:latest
-    restart: always
+    restart: unless-stopped
     volumes:
       - ${CONFIG_PATH}/xiaoya:/data
     ports:
       - 80:80
+    environment:
+      - TZ=${TZ}
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
+  cloudflare:
+    container_name: cloudflare
+    image: cloudflare/cloudflared:latest
+    restart: always
+    command: "tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN}"
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
 
   watchtower:
     container_name: watchtower
     image: containrrr/watchtower
-    environment:
-      - WATCHTOWER_CLEANUP=true
-      - WATCHTOWER_LABEL_ENABLE=true
-      - TZ=${TZ}
+    restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      WATCHTOWER_CLEANUP: "true"
+      WATCHTOWER_LABEL_ENABLE: "true"
+      TZ: "${TZ}"
+      WATCHTOWER_NOTIFICATION_REPORT: "true"
+      WATCHTOWER_NOTIFICATION_URL: >
+        telegram://${TELEGRAM_TOKEN}@telegram?chats=5385841963
+      WATCHTOWER_NOTIFICATION_TEMPLATE: |
+        {{- if .Report -}}
+          {{- with .Report -}}
+        {{len .Scanned}} Scanned, {{len .Updated}} Updated, {{len .Failed}} Failed
+              {{- range .Updated}}
+        - {{.Name}} ({{.ImageName}}): {{.CurrentImageID.ShortID}} updated to {{.LatestImageID.ShortID}}
+              {{- end -}}
+              {{- range .Fresh}}
+        - {{.Name}} ({{.ImageName}}): {{.State}}
+            {{- end -}}
+            {{- range .Skipped}}
+        - {{.Name}} ({{.ImageName}}): {{.State}}: {{.Error}}
+            {{- end -}}
+            {{- range .Failed}}
+        - {{.Name}} ({{.ImageName}}): {{.State}}: {{.Error}}
+            {{- end -}}
+          {{- end -}}
+        {{- else -}}
+          {{range .Entries -}}{{.Message}}{{"\n"}}{{- end -}}
+        {{- end -}}

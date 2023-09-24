@@ -8,3 +8,6 @@
 !/vscode/User/snippets
 !/vscode/User/keybindings.json
 !/vscode/User/settings.json
+
+# env
+.env
