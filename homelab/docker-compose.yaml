@@ -1,10 +1,4 @@
-version: "3"
-networks:
-  network:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.128.2.0/24
+version: "3.8"
 
 services:
   heimdall:
@@ -19,9 +13,6 @@ services:
       - ${CONFIG_PATH}/heimdall:/config
     ports:
       - 60211:443
-    networks:
-      network:
-        ipv4_address: 172.128.2.11
 
   portainer:
     image: 6053537/portainer-ce:latest
@@ -34,9 +25,6 @@ services:
       - ${CONFIG_PATH}/portainer:/data
     ports:
       - 60212:9000
-    networks:
-      network:
-        ipv4_address: 172.128.2.12
 
   jellyfin:
     image: jellyfin/jellyfin
@@ -53,9 +41,6 @@ services:
       - ${MEDIA_PATH}/family:/media/family
     ports:
       - 60220:8096
-    networks:
-      network:
-        ipv4_address: 172.128.2.20
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
 
@@ -65,7 +50,7 @@ services:
     network_mode: host
     restart: unless-stopped
     volumes:
-      - ${CONFIG_PATH}/homeassistant/config:/config
+      - ${CONFIG_PATH}/homeassistant:/config
       - /etc/localtime:/etc/localtime:ro
     privileged: true
     labels:
