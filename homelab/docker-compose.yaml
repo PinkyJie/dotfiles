@@ -26,28 +26,6 @@ services:
     ports:
       - 60212:9000
 
-  emby:
-    image: lovechen/embyserver:latest
-    container_name: emby
-    restart: unless-stopped
-    environment:
-      - UID=0
-      - GID=0
-      - GIDLIST=0
-      - TZ=${TZ}
-    volumes:
-      - ${CONFIG_PATH}/emby:/config
-      - ${MEDIA_PATH}/video:/media/video
-      - ${MEDIA_PATH}/family:/media/family
-    ports:
-      - 8096:8096
-      - 1900:1900
-      - 7359:7359
-    devices:
-      - /dev/vchiq:/dev/vchiq
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
-
   homeassistant:
     container_name: homeassistant
     image: "ghcr.io/home-assistant/home-assistant:stable"
