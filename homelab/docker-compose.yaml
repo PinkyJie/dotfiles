@@ -105,6 +105,14 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
 
+  tg_bing_dalle:
+    container_name: tg_bing_dalle
+    image: tg_bing_dalle
+    restart: always
+    environment:
+      - tg_token=${TELEGRAM_TOKEN}
+      - bing_cookie=${DALLE_BING_COOKIE}
+
   watchtower:
     container_name: watchtower
     image: containrrr/watchtower
