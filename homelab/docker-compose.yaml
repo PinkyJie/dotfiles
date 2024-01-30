@@ -97,6 +97,48 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
 
+  Aria2-Pro:
+    container_name: aria2-pro
+    image: p3terx/aria2-pro
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - UMASK_SET=022
+      - RPC_SECRET=admin
+      - RPC_PORT=6800
+      - LISTEN_PORT=6888
+      - DISK_CACHE=64M
+      - IPV6_MODE=false
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_PATH}/aria2-config:/config
+      - ${MEDIA_PATH}/downloads:/downloads
+    ports:
+      - 6800:6800
+      - 6888:6888
+      - 6888:6888/udp
+    logging:
+      driver: json-file
+      options:
+        max-size: 1m
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
+  AriaNg:
+    container_name: ariang
+    image: p3terx/ariang
+    restart: unless-stopped
+    command: --port 6880
+    ports:
+      - 6880:6880
+    logging:
+      driver: json-file
+      options:
+        max-size: 1m
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
   cloudflare:
     container_name: cloudflare
     image: cloudflare/cloudflared:latest
