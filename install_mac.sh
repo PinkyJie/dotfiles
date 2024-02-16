@@ -43,6 +43,7 @@ print_header "-- PowerLevel10k theme"
 brew install romkatv/powerlevel10k/powerlevel10k
 check_error "zsh theme"
 
+# SSH
 print_header "3. SSH keygen"
 ssh-keygen -t rsa -b 4096 -C pinkyjie.gn@gmail.com
 eval "$(ssh-agent -s)"
