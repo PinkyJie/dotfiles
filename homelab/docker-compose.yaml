@@ -112,7 +112,7 @@ services:
       - IPV6_MODE=false
       - TZ=${TZ}
     volumes:
-      - ${CONFIG_PATH}/aria2-config:/config
+      - ${CONFIG_PATH}/aria2:/config
       - ${MEDIA_PATH}/downloads:/downloads
     ports:
       - 6800:6800
@@ -154,6 +154,17 @@ services:
     environment:
       - tg_token=${TELEGRAM_TOKEN}
       - bing_cookie=${DALLE_BING_COOKIE}
+
+  bitwarden:
+    container_name: vaultwarden
+    image: vaultwarden/server
+    restart: unless-stopped
+    volumes:
+      - ${CONFIG_PATH}//vaultwarden/:/data/
+    ports:
+      - 3456:80
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
 
   watchtower:
     container_name: watchtower
