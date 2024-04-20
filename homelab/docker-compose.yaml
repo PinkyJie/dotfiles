@@ -173,7 +173,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
-      WATCHTOWER_SCHEDULE: "0 0 4 * * *"
+      WATCHTOWER_SCHEDULE: "0 0 5 * * *"
       WATCHTOWER_CLEANUP: "true"
       WATCHTOWER_LABEL_ENABLE: "true"
       TZ: "${TZ}"

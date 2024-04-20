@@ -6,10 +6,10 @@ Host lgtv
     HostName 192.168.5.30
     User root
 
-Host oci
-    HostName 192.9.179.70
-    User ubuntu
-
 Host pi4
     HostName 192.168.5.36
+    User wenbo
+
+Host mint
+    HostName 192.168.5.240
     User wenbo
