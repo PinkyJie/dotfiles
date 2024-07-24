@@ -3,11 +3,10 @@ export NVM_DIR="$HOME/.nvm"
 
 if [[ $IS_MAC -eq 1 ]]; then
     # powerlevel10k zsh theme
-    source $(brew --prefix)/opt/powerlevel10k/powerlevel10k.zsh-theme
+    source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
 
     # nvm
     [ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && \. "$(brew --prefix)/opt/nvm/nvm.sh" # This loads nvm
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
     # fzf
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -22,7 +21,6 @@ if [[ $IS_LINUX -eq 1 ]]; then
 
     # nvm
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
     # fzf
     source /usr/share/doc/fzf/examples/key-bindings.zsh

@@ -30,7 +30,7 @@ $(brew --prefix)/opt/fzf/install
 
 # apps
 print_header "-- Homebrew apps"
-brew install --cask item2 visual-studio-code google-chrome appcleaner iina spectacle notion
+brew install --cask iterm2 visual-studio-code google-chrome appcleaner iina spectacle notion
 check_error "homebrew apps"
 
 print_header "2. Oh My Zsh"

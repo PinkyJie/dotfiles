@@ -6,6 +6,6 @@ if [[ $IS_MAC -eq 1 ]]; then
 fi
 
 function scp-docker() {
-    scp ~/.dotfiles/homelab/.env wenbo@pi4:~/docker/.env
-    scp ~/.dotfiles/homelab/docker-compose.yaml wenbo@pi4:~/docker/docker-compose.yml
+    scp ~/.dotfiles/homelab/.env wenbo@mint:~/docker/.env
+    scp ~/.dotfiles/homelab/docker-compose.yaml wenbo@mint:~/docker/docker-compose.yml
 }
