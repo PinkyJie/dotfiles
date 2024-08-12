@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   heimdall:
     image: linuxserver/heimdall:2.5.4
@@ -12,7 +10,7 @@ services:
     volumes:
       - ${CONFIG_PATH}/heimdall:/config
     ports:
-      - 60211:443
+      - 8092:80
 
   portainer:
     image: 6053537/portainer-ce:latest
@@ -24,7 +22,9 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ${CONFIG_PATH}/portainer:/data
     ports:
-      - 60212:9000
+      - 9000:9000
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
 
   homeassistant:
     container_name: homeassistant
@@ -54,34 +54,34 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
 
-  mqtt:
-    container_name: mqtt
-    image: eclipse-mosquitto
-    restart: unless-stopped
-    volumes:
-      - ${CONFIG_PATH}/mosquitto:/mosquitto
-    ports:
-      - 1883:1883
-      - 9001:9001
-    command: "mosquitto -c /mosquitto-no-auth.conf"
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
+  # mqtt:
+  #   container_name: mqtt
+  #   image: eclipse-mosquitto
+  #   restart: unless-stopped
+  #   volumes:
+  #     - ${CONFIG_PATH}/mosquitto:/mosquitto
+  #   ports:
+  #     - 1883:1883
+  #     - 9001:9001
+  #   command: "mosquitto -c /mosquitto-no-auth.conf"
+  #   labels:
+  #     - "com.centurylinklabs.watchtower.enable=true"
 
-  zigbee2mqtt:
-    container_name: zigbee2mqtt
-    image: koenkk/zigbee2mqtt
-    restart: unless-stopped
-    volumes:
-      - ${CONFIG_PATH}/zigbee2mqtt:/app/data
-      - /run/udev:/run/udev:ro
-    ports:
-      - 8080:8080
-    environment:
-      - TZ=${TZ}
-    devices:
-      - /dev/ttyUSB0:/dev/ttyUSB0
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
+  # zigbee2mqtt:
+  #   container_name: zigbee2mqtt
+  #   image: koenkk/zigbee2mqtt
+  #   restart: unless-stopped
+  #   volumes:
+  #     - ${CONFIG_PATH}/zigbee2mqtt:/app/data
+  #     - /run/udev:/run/udev:ro
+  #   ports:
+  #     - 8080:8080
+  #   environment:
+  #     - TZ=${TZ}
+  #   devices:
+  #     - /dev/ttyUSB0:/dev/ttyUSB0
+  #   labels:
+  #     - "com.centurylinklabs.watchtower.enable=true"
 
   xiaoya:
     container_name: xiaoya
@@ -147,14 +147,6 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
 
-  tg_bing_dalle:
-    container_name: tg_bing_dalle
-    image: tg_bing_dalle
-    restart: always
-    environment:
-      - tg_token=${TELEGRAM_TOKEN}
-      - bing_cookie=${DALLE_BING_COOKIE}
-
   bitwarden:
     container_name: vaultwarden
     image: vaultwarden/server
@@ -163,6 +155,15 @@ services:
       - ${CONFIG_PATH}//vaultwarden/:/data/
     ports:
       - 3456:80
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
+  pixman:
+    container_name: pixman
+    image: pixman/pixman
+    restart: unless-stopped
+    ports:
+      - 5050:5000
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
 
