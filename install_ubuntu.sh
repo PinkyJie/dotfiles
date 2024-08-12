@@ -18,7 +18,7 @@ sudo apt update
 
 print_header "1. Install cli tools"
 # cli tools
-sudo apt -y install tig fzf zsh zsh-autosuggestions
+sudo apt -y install tig fzf zsh zsh-autosuggestions vim
 check_error "cli tools"
 
 # nvm
@@ -36,9 +36,9 @@ check_error "zsh theme"
 
 # SSH
 print_header "3. SSH keygen"
-ssh-keygen -t rsa -b 4096 -C pinkyjie.gn@gmail.com
+ssh-keygen -t ed25519 -C "pinkyjie.gn@gmail.com"
 eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_rsa
+ssh-add ~/.ssh/id_ed25519
 
 print_header "4. Config soft link"
 
@@ -51,7 +51,12 @@ ln -s ~/.dotfiles/zsh/zshrc ~/.zshrc
 rm ~/.gitconfig
 ln -s ~/.dotfiles/git/gitconfig ~/.gitconfig
 
+# VSCode
+curl -O https://go.microsoft.com/fwlink/?LinkID=760868
+sudo apt install code*.deb
+rm -rf code*.deb
+
 print_header "5. Change default shell to zsh"
-sudo chsh -s $(which zsh) ubuntu
+chsh -s $(which zsh)
 
 print_header "All Done!"

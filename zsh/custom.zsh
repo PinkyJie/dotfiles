@@ -17,7 +17,7 @@ fi
 
 if [[ $IS_LINUX -eq 1 ]]; then
     #powerlevel10k zsh theme
-    ZSH_THEME="powerlevel10k/powerlevel10k"
+    source "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k/powerlevel10k.zsh-theme"
 
     # nvm
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

@@ -45,9 +45,9 @@ check_error "zsh theme"
 
 # SSH
 print_header "3. SSH keygen"
-ssh-keygen -t rsa -b 4096 -C pinkyjie.gn@gmail.com
+ssh-keygen -t ed25519 -C "pinkyjie.gn@gmail.com"
 eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_rsa
+ssh-add ~/.ssh/id_ed25519
 
 print_header "4. Config soft link"
 
