@@ -56,6 +56,18 @@ curl -O https://go.microsoft.com/fwlink/?LinkID=760868
 sudo apt install code*.deb
 rm -rf code*.deb
 
+# run VSCode once to generate User folder
+code &
+vscode_pid=$!
+sleep 1s
+kill -9 $vscode_pid
+
+# vscode
+rm -rf ~/.config/Code/User
+ln -s ~/.dotfiles/vscode/User ~/.config/Code/User
+print_header "-- Install vscode plugins"
+cat ~/.dotfiles/vscode/extension.list | xargs -L 1 code --install-extension
+
 print_header "5. Change default shell to zsh"
 chsh -s $(which zsh)
 
