@@ -12,20 +12,6 @@ services:
     ports:
       - 8092:80
 
-  portainer:
-    image: 6053537/portainer-ce:latest
-    container_name: portainer
-    restart: unless-stopped
-    environment:
-      - TZ={TZ}
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ${CONFIG_PATH}/portainer:/data
-    ports:
-      - 9000:9000
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
-
   homeassistant:
     container_name: homeassistant
     image: "ghcr.io/home-assistant/home-assistant:stable"
@@ -83,17 +69,15 @@ services:
   #   labels:
   #     - "com.centurylinklabs.watchtower.enable=true"
 
-  xiaoya:
-    container_name: xiaoya
-    image: xiaoyaliu/alist:latest
+  G-Box:
+    container_name: g-box
+    image: ailg/g-box:hostmode
     restart: unless-stopped
-    volumes:
-      - ${CONFIG_PATH}/xiaoya:/data
-    ports:
-      - 80:80
-      - 2345:2345
+    network_mode: host
     environment:
       - TZ=${TZ}
+    volumes:
+      - ${CONFIG_PATH}/g-box:/data
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
 
